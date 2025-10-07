@@ -10,7 +10,7 @@ class PIDController(Node):
     def __init__(self):
         super().__init__('pid_controller')
 
-        #PID PARAMETERS (MATCH WITH PURE PURSUIT ALWWAYS)
+        #PID PARAMETERS (MATCH WITH PURE PURSUIT ALWAYS)
         self.declare_parameter('kp', 1.0)
         self.declare_parameter('ki', 0.0)
         self.declare_parameter('kd', 0.1)
@@ -107,4 +107,5 @@ def main(args=None):
     rclpy.shutdown()
 
 if __name__ == '__main__':
+
     main()
