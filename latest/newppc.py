@@ -43,6 +43,7 @@ class PurePursuitController(Node):
         self.v_ref_pub = self.create_publisher(Float64, '/v_ref', 10)
         self.cmd_vel_pub = self.create_publisher(Twist, '/pp_cmd_vel', 10)
         self.lookahead_pub = self.create_publisher(PointStamped, '/lookahead_point',10)
+        self.track_point_pub = self.create_publisher(PointStamped, '/track_point', 10) #edit by rivaldo to use desired position in PID
 
         self.create_timer(0.05, self.purepursuit_callback) #20Hz
 
@@ -150,6 +151,8 @@ class PurePursuitController(Node):
         point_msg.point.x = lap_x
         point_msg.point.y = lap_y
         point_msg.point.z = 0.0
+        self.track_point_pub.publish(point_msg) #another edit by rivaldo to also use position in PID
+
         self.lookahead_pub.publish(point_msg)
 
         #Update distance variable
@@ -191,3 +194,4 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+
