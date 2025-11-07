@@ -74,19 +74,20 @@ class PIDController(Node):
         x_diff = desired_point[0] - actual_position[0]
         y_diff = desired_point[1] - actual_position[1]
         error_length = math.sqrt(x_diff ** 2 + y_diff ** 2)
+                        ''' Commented definiton posted here for drop down menu being simplified 
+                        def update_plot(self):
+                            """Update real-time plot of error"""
+                            self.line.set_data(range(len(self.data)), self.data)
+                            self.ax.relim()
+                            self.ax.autoscale_view()
+                            plt.pause(0.001)  # Pause briefly to allow the plot to update
+                        '''
         
         # Determine sign based on whether we're approaching the waypoint
         # Positive error means we need to move forward, negative means we've overshot
         error_sign = 1 if error_length > 1.0 else -1  # Simple threshold-based sign
         return error_length * error_sign
-    '''
-    def update_plot(self):
-        """Update real-time plot of error"""
-        self.line.set_data(range(len(self.data)), self.data)
-        self.ax.relim()
-        self.ax.autoscale_view()
-        plt.pause(0.001)  # Pause briefly to allow the plot to update
-    '''
+    
     def generate_control_output(self):
         current_x = self.vehicle_x #should be updated from pose_callback
         current_y = self.vehicle_y #should be updated from pose_callback
@@ -171,4 +172,5 @@ def main(args=None):
         rclpy.shutdown()
 
 if __name__ == '__main__':
+
     main()
