@@ -95,7 +95,16 @@ class PurePursuitController(Node):
                 close_idx = i
         return close_idx
     
-    '''
+    
+    def find_lookaheadpoint(self, x, y, ld, future_wp):
+        for wp in future_wp[1:]:
+            dx = wp[0] - x
+            dy = wp[1]- y
+            distance = math.hypot(dx, dy)
+
+            if distance >= ld:
+                return wp
+                '''
     def find_lookaheadpoint(self, x, y, ld, future_wp):
         for i, waypoint in enumerate(future_wp):
             wp_x, wp_y = waypoint[:2]
@@ -108,14 +117,6 @@ class PurePursuitController(Node):
                 return (wp_x, wp_y)
         return None
     '''
-    def find_lookaheadpoint(self, x, y, ld, future_wp):
-        for wp in future_wp[1:]:
-            dx = wp[0] - x
-            dy = wp[1]- y
-            distance = math.hypot(dx, dy)
-
-            if distance >= ld:
-                return wp
         return future_wp[-1]  # Return last waypoint if none found
 
     #Functions Needed for Calculations
@@ -243,3 +244,4 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+
